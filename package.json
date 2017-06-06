@@ -1,0 +1,28 @@
+{
+  "name": "radixtool",
+  "version": "1.0.0",
+  "description": "This tool can be used to checkout and deploy anything which is build upong Radix Framework. Radix was also known as SMVC2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "build-tool"
+  ],
+  "author": "kunal mestri",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.4.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-git": "^2.4.0",
+    "gulp-unzip": "^0.2.0",
+    "gulp-util": "^3.0.8",
+    "gulp-zip": "^4.0.0",
+    "yargs": "^8.0.1"
+  },
+  "devDependencies": {
+    "del": "^2.2.2",
+    "vinyl-paths": "^2.1.0"
+  }
+}
