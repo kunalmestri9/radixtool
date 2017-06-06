@@ -4,7 +4,7 @@
   "description": "This tool can be used to checkout and deploy anything which is build upong Radix Framework. Radix was also known as SMVC2.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	
   },
   "keywords": [
     "build-tool"
@@ -24,5 +24,13 @@
   "devDependencies": {
     "del": "^2.2.2",
     "vinyl-paths": "^2.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunalmestri9/radixtool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kunalmestri9/radixtool/issues"
+  },
+  "homepage": "https://github.com/kunalmestri9/radixtool#readme"
 }
