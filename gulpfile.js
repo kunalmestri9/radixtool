@@ -149,8 +149,14 @@ gulp.task('build',['update-envoironment'], function(callback){
 		
 	},
 	function(){
-		util.log("Checkout of "+ metafile.name + " is done");	
-		callback();
+		util.log("Checkout of "+ metafile.name + " is done");
+		//Last thing is checkout thirdparties folder.
+		execSync("git clone "+ metafile.thirdparties +" "+ PSEUDOCAT_PATH + "/thirdparties" );
+		gulp.src(["phpfiles/pear/**"],{"dot":true})
+		.pipe(gulp.dest( PSEUDOCAT_PATH +"/pear"))
+		.on("end",function(){
+			callback();
+		});
 	});
 });
 
