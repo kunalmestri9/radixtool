@@ -5,9 +5,13 @@ You must project.json file per project in the projects folder to use it.
 
 Usage:
 ------
-You can install this module using npm : 
-`npm install -g radixtool`
 
+Just go to any folder where you want to checkout the RadixTool. Add your project.json file to projects folder. 
+
+
+
+You can install this module using npm : 
+`npm install radixtool`
 
 
 ## License
