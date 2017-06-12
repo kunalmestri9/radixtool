@@ -101,7 +101,7 @@ gulp.task('checkout',['clean'] ,function(callback){
 		fs.mkdirSync(TMP_PATH+path.sep+"tmpb");
 		util.log("tempBuild has been created");
 	}	
-
+	
 	async.eachSeries( metafile.repos ,function(repo,next){
 		util.log("Checkout : " + repo.name +":"+ repo.url);
 		var args=TMP_PATH+path.sep+"repos"+path.sep+repo.name;
@@ -112,7 +112,18 @@ gulp.task('checkout',['clean'] ,function(callback){
 		next();
 	},
 	function(){
-		callback();
+		if(argv.dev=="true"){
+			execSync("git clone "+ metafile.thirdparties +" "+ DEV_PATH +path.sep+ "thirdparties" );
+			gulp.src(["phpfiles"+path.sep+"pear"+path.sep+"**"],{"dot":true})
+			.pipe(gulp.dest( DEV_PATH +path.sep+"pear"))
+			.on("end",function(){
+				callback();
+			});
+		}else{
+			callback();
+		}
+		
+
 	});
 });
 
@@ -153,7 +164,7 @@ gulp.task('build',['update-envoironment'], function(callback){
 	function(){
 		util.log("Checkout of "+ metafile.name + " is done");
 		//Last thing is checkout thirdparties folder.
-		execSync("git clone "+ metafile.thirdparties +" "+ PSEUDOCAT_PATH + "/thirdparties" );
+		execSync("git clone "+ metafile.thirdparties +" "+ PSEUDOCAT_PATH +path.sep+"thirdparties" );
 		gulp.src(["phpfiles"+path.sep+"pear"+path.sep+"**"],{"dot":true})
 		.pipe(gulp.dest( PSEUDOCAT_PATH +path.sep+"pear"))
 		.on("end",function(){
