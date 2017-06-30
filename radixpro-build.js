@@ -33,9 +33,12 @@ gulp.task('checkout',['clean'] ,function(callback){
             gulp.src(args+'/**')
             .pipe(zip(repo.name+'.zip'))
             .pipe(gulp.dest(args))
+            util.log(repo.url + " = > Repo Fetch successfully");
             next();
+
         },
         function(){
+            util.log("Next Repo Array");
             nt();
         });
     },function(){
