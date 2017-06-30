@@ -50,14 +50,15 @@ gulp.task('checkout',['clean'] ,function(callback){
 gulp.task('updatewebapp',[],function(){
     util.log("its a webapp");
     //check if project contains prod folder
+    var enviornm=(argv.env)?argv.env:"local";
     var args=argv.path;
     //del([args+"/env"]);
     if (fs.existsSync(args+"/prod")){
         gulp.src([args+'/prod/**'],{dot: true})
         .pipe(gulp.dest(args+'/env'))
         .on('end', function () {
-            var command1="php  phpfiles"+path.sep+"envreplacer.php "+ args +enviornm;
-            var command2="php  phpfiles"+path.sep+"envgenerator.php "+ args +enviornm;
+            var command1="php  phpfiles"+path.sep+"envreplacer.php "+ args +" "+ enviornm;
+            var command2="php  phpfiles"+path.sep+"envgenerator.php "+ args +" "+enviornm;
             execSync(command1,{stdio:[0,1,2]});
             util.log(command1);
             execSync(command2,{stdio:[0,1,2]});
