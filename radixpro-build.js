@@ -10,7 +10,7 @@ var del = require('del');
 var vinylPaths = require('vinyl-paths');
 const path = require('path');
 
-var metafile   		= JSON.parse(fs.readFileSync('projects'+path.sep + argv.project +".json", 'utf8'));
+var metafile   		= (typeof(argv.project)!=="undefined")?JSON.parse(fs.readFileSync('projects'+path.sep + argv.project +".json", 'utf8')): [];
 var BUILD_PATH 		= "."+path.sep+"dist";
 var PSEUDOCAT_PATH  = BUILD_PATH +path.sep+argv.dir;
 
