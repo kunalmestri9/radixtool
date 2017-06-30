@@ -46,6 +46,35 @@ gulp.task('checkout',['clean'] ,function(callback){
     });
     
 });
+
+gulp.task('updatewebapp',[],function(){
+    util.log("its a webapp");
+    //check if project contains prod folder
+    var args=argv.path;
+    //del([args+"/env"]);
+    if (fs.existsSync(args+"/prod")){
+        gulp.src([args+'/prod/**'],{dot: true})
+        .pipe(gulp.dest(args+'/env'))
+        .on('end', function () {
+            var command1="php  phpfiles"+path.sep+"envreplacer.php "+ args +enviornm;
+            var command2="php  phpfiles"+path.sep+"envgenerator.php "+ args +enviornm;
+            execSync(command1,{stdio:[0,1,2]});
+            util.log(command1);
+            execSync(command2,{stdio:[0,1,2]});
+            util.log(command2);
+            gulp.src([args+ path.sep +'env'+ path.sep +'**'],{dot: true})
+            .pipe(gulp.dest(args))
+            .on("end",function(){
+                del.sync([args+path.sep+ "env"]);
+            });
+        });
+    }else{
+        util.log("No prod folder!! ohh mission failed");
+    }
+});
+
+
+
 gulp.task('clean', function () {
     return del([
         BUILD_PATH
