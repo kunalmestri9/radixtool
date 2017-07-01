@@ -57,8 +57,8 @@ gulp.task('updatewebapp',[],function(){
         gulp.src([args+'/prod/**'],{dot: true})
         .pipe(gulp.dest(args+'/env'))
         .on('end', function () {
-            var command1="php  phpfiles" + path.sep + "envreplacer.php "  + args  + " ' ' " + enviornm;
-            var command2="php  phpfiles" + path.sep + "envgenerator.php " + args  + " ' ' " + enviornm;
+            var command1="php  phpfiles" + path.sep + "envreplacer.php "  + args  + " \"\" " + enviornm;
+            var command2="php  phpfiles" + path.sep + "envgenerator.php " + args  + " \"\" " + enviornm;
             execSync(command1,{stdio:[0,1,2]});
             util.log(command1);
             execSync(command2,{stdio:[0,1,2]});
