@@ -30,9 +30,11 @@ gulp.task('checkout',['clean'] ,function(callback){
                 execSync("git checkout tags/"+repo.tag,{cwd:args});
                 //execSync("cd " + BUILD_PATH+ path.sep +"..");
             }
-            gulp.src(args+'/**')
-            .pipe(zip(repo.name+'.zip'))
-            .pipe(gulp.dest(args))
+            if(argv.zipit){
+                gulp.src(args+'/**')
+                .pipe(zip(repo.name+'.zip'))
+                .pipe(gulp.dest(args))
+            }
             util.log(repo.url + " = > Repo Fetch successfully");
             next();
 
