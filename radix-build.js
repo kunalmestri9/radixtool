@@ -48,7 +48,7 @@ gulp.task("update-envoironment",["create-psedocat"],function(callback){
         }else{
             util.log("its a webapp");
             //check if project contains prod folder
-            execSync("sudo chmod -R 777 "+TMP_PATH);
+            //execSync("sudo chmod -R 777 "+TMP_PATH);
             var args=TMP_PATH+path.sep+"repos"+path.sep+repo.name;
             //del([args+"/env"]);
             if (fs.existsSync(args+"/prod")){
@@ -108,6 +108,19 @@ gulp.task('checkout',['clean'] ,function(callback){
             args=TMP_PATH+path.sep+repo.name;
         }
         execSync("git clone "+ repo.url +" "+ args );
+		if(typeof(repo.tag)!="undefined"){
+			//execSync("cd " + args);
+			//execSync("pwd ");
+			execSync("git fetch",{cwd:args});
+			execSync("git checkout tags/"+repo.tag,{cwd:args});
+			//execSync("cd " + BUILD_PATH+ path.sep +"..");
+		}else if(typeof(repo.branch)!="undefined"){
+			//execSync("cd " + args);
+			//execSync("pwd ");
+			execSync("git fetch",{cwd:args});
+			execSync("git checkout "+repo.branch,{cwd:args});
+			//execSync("cd " + BUILD_PATH+ path.sep +"..");
+		}
         next();
     },
     function(){
