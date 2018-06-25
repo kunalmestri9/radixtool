@@ -184,3 +184,22 @@ gulp.task('build',['update-envoironment'], function(callback){
         });
     });
 });
+
+gulp.task('pull', function(callback){
+    util.log("Started the process of bulk pull " + metafile.name );
+    async.eachSeries( metafile.repos ,function(repo,next){
+        util.log("Starting pull for : " + repo.name +":"+ repo.url);
+		var args=DEV_PATH+repo.name;
+		util.log("Pulling "  + args );
+		execSync("git pull",{
+			cwd: args,
+			stdio:'inherit'
+		});
+		next();
+    },
+    function(){
+		callback();
+        util.log("Pulling is done.All projects are updated");
+        //Last thing is checkout thirdparties folder.
+    });
+});
